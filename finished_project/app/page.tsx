@@ -2,6 +2,19 @@
 
 import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import { QuestionFormField } from "./_components/QuestionFormField";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schema = yup.object({
+  questions: yup
+    .array()
+    .of(
+      yup.object().shape({
+        text: yup.string().required("This field is required"),
+      })
+    )
+    .required(),
+});
 
 type Question = { text: string };
 
@@ -14,6 +27,7 @@ const questionDefaultValue: Question = { text: "" };
 export default function Home() {
   const { control, handleSubmit } = useForm<Inputs>({
     defaultValues: { questions: [] },
+    resolver: yupResolver(schema),
   });
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
