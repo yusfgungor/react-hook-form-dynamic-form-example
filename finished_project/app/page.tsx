@@ -2,9 +2,13 @@
 
 import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 
+type Question = { text: string };
+
 type Inputs = {
-  questions: Array<{ text: string }>;
+  questions: Array<Question>;
 };
+
+const questionDefaultValue: Question = { text: "" };
 
 export default function Home() {
   const { control, handleSubmit } = useForm<Inputs>({
@@ -12,10 +16,14 @@ export default function Home() {
   });
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
-  useFieldArray({
+  const { append } = useFieldArray({
     control,
     name: "questions",
   });
+
+  function addNewQuestion() {
+    append(questionDefaultValue);
+  }
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -64,6 +72,7 @@ export default function Home() {
             <button
               type="button"
               className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+              onClick={addNewQuestion}
             >
               + Add New Question
             </button>
