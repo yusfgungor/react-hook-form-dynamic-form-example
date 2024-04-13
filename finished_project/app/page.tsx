@@ -1,12 +1,21 @@
 "use client";
 
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 
-type Inputs = {};
+type Inputs = {
+  questions: Array<{ text: string }>;
+};
 
 export default function Home() {
-  const { handleSubmit } = useForm<Inputs>();
+  const { control, handleSubmit } = useForm<Inputs>({
+    defaultValues: { questions: [] },
+  });
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+
+  useFieldArray({
+    control,
+    name: "questions",
+  });
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
