@@ -16,13 +16,17 @@ export default function Home() {
   });
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: "questions",
   });
 
   function addNewQuestion() {
     append(questionDefaultValue);
+  }
+
+  function removeQuestion(questionIndex: number) {
+    remove(questionIndex);
   }
 
   return (
@@ -51,6 +55,7 @@ export default function Home() {
                   <button
                     type="submit"
                     className="flex justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                    onClick={() => removeQuestion(index)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
