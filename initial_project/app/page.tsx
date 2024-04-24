@@ -1,13 +1,6 @@
 "use client";
 
-import { useForm, SubmitHandler } from "react-hook-form";
-
-type Inputs = {};
-
 export default function Home() {
-  const { handleSubmit } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -17,7 +10,7 @@ export default function Home() {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+        <form className="space-y-6">
           <div>
             <label className="block text-sm font-medium leading-6 text-gray-900">
               1. Question
