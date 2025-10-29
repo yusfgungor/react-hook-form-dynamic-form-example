@@ -11,6 +11,7 @@ export default function Home() {
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6">
+          {/* Component */}
           <div>
             <label className="block text-sm font-medium leading-6 text-gray-900">
               1. Question
@@ -39,7 +40,9 @@ export default function Home() {
                 </button>
               </div>
             </div>
+            <span className="hidden text-sm text-red-500">error message</span>
           </div>
+          {/* Component */}
 
           <div className="flex flex-col gap-1">
             <button
